@@ -21,6 +21,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+// see https://github.com/DiegoSanzVi/saving_displaying_images_db
+
 @Route
 @PWA(name = "Programm zur AKten Organisaton", shortName = "PAKO")
 public class MainView extends VerticalLayout {
@@ -42,14 +44,13 @@ public class MainView extends VerticalLayout {
         picUpload.setAcceptedFileTypes("image/jpeg","image/jpg", "image/png");
 
         picUpload.addSucceededListener(event -> {
-            String attachmentName = event.getFileName();
+            //String attachmentName = event.getFileName();
             try {
                 // The image can be jpg png or gif, but we store it always as png file in this example
                 BufferedImage inputImage = ImageIO.read(picBuffer.getInputStream());
                 ByteArrayOutputStream pngContent = new ByteArrayOutputStream();
                 ImageIO.write(inputImage, "png", pngContent);
                 saveProfilePicture(pngContent.toByteArray());
-                //showImage();
             } catch (IOException e) {
                 e.printStackTrace();
             }
